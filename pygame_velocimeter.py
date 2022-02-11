@@ -114,12 +114,12 @@ if __name__ == '__main__':
     battery= Gauge(
         screen=screen,
         FONT=FONT_,
-        x_cord=width ,
-        y_cord=height,
-        thickness=20,
-        radius=200,
-        start_angle=100,
-        stop_angle=160,
+        x_cord=width + 50 ,
+        y_cord=height + 50,
+        thickness=5,
+        radius=50,
+        start_angle=120,
+        stop_angle=60,
         circle_colour=circle_c,
         glow=False)
 
