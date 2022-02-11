@@ -100,7 +100,7 @@ if __name__ == '__main__':
         stop_angle=340,
         circle_colour=circle_c,
         glow=False)
-    acel= Gauge(
+    battery = Gauge(
         screen=screen,
         FONT=FONT_,
         x_cord=width,
@@ -111,11 +111,11 @@ if __name__ == '__main__':
         stop_angle=80,
         circle_colour=circle_c,
         glow=False)
-    battery= Gauge(
+    acel= Gauge(
         screen=screen,
-        FONT=pygame.font.Font("./NFS_by_JLTV.ttf", 5),
-        x_cord=width + 180 ,
-        y_cord=height + 180,
+        FONT=pygame.font.Font("./NFS_by_JLTV.ttf", 20),
+        x_cord=width + 200 ,
+        y_cord=height + 200,
         thickness=5,
         radius=50,
         start_angle=120,
