@@ -7,7 +7,7 @@ import serial
 
 hw_sensor = serial.Serial(port='/dev/ttyUSB0', baudrate=115200, timeout=1, write_timeout=1)
 class Gauge:
-    def __init__(self, screen, FONT, x_cord, y_cord, thickness, radius, start_angle, stop_angle, circle_colour, glow=True):
+    def __init__(self, screen, FONT, x_cord, y_cord, thickness, radius, start_angle, stop_angle, circle_colour,txt_unit, txt_disp, glow=True):
         self.screen = screen
         self.Font = FONT
         self.x_cord = x_cord
@@ -19,6 +19,8 @@ class Gauge:
         self.circle_colour = circle_colour
         self.glow = glow
         self.angle_path=stop_angle-start_angle
+        self.txt_unit=txt_unit
+        self.txt_disp=txt_disp
     def draw(self, percent):
         fill_angle = int(percent*self.angle_path/100)
         per=percent
@@ -34,10 +36,10 @@ class Gauge:
                 ac[indexi] = 0
             if ac[indexi] > 255:
                 ac[indexi] = 255
-
-        pertext = self.Font.render(str(percent) + " Kmh", True, [255,255,255])
-        pertext_rect = pertext.get_rect(center=(int(self.x_cord), int(self.y_cord)))
-        self.screen.blit(pertext, pertext_rect)
+        if(self.txt_disp==True):
+           pertext = self.Font.render(str(percent) + self.txt_unit, True, [255,255,255])
+           pertext_rect = pertext.get_rect(center=(int(self.x_cord), int(self.y_cord)))
+           self.screen.blit(pertext, pertext_rect)
 
         for i in range(0, self.thickness):
             pygame.gfxdraw.arc(screen, int(self.x_cord), int(self.y_cord), self.radius - i, self.start_angle,self.stop_angle, self.circle_colour)
@@ -82,7 +84,7 @@ if __name__ == '__main__':
     screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
 
 
-    pygame.display.set_caption('Wahaj Gauge Pygame')
+    pygame.display.set_caption('')
 
 
     fps = 30
@@ -99,6 +101,8 @@ if __name__ == '__main__':
         start_angle=200,
         stop_angle=340,
         circle_colour=circle_c,
+        txt_unit=' Km/h',
+        txt_disp=True,
         glow=False)
     battery = Gauge(
         screen=screen,
@@ -110,17 +114,21 @@ if __name__ == '__main__':
         start_angle=0,
         stop_angle=80,
         circle_colour=circle_c,
+        txt_unit='',
+        txt_disp=False,
         glow=False)
     acel= Gauge(
         screen=screen,
         FONT=pygame.font.Font("./NFS_by_JLTV.ttf", 20),
         x_cord=width + 200 ,
-        y_cord=height + 200,
+        y_cord=height + 150,
         thickness=5,
         radius=50,
-        start_angle=120,
-        stop_angle=60,
+        start_angle=45,
+        stop_angle=315,
         circle_colour=circle_c,
+        txt_unit=' %',
+        txt_disp=True,
         glow=False)
 
     percentage = 0
