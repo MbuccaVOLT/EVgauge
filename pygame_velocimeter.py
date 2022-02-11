@@ -18,13 +18,9 @@ class Gauge:
         self.stop_angle = stop_angle
         self.circle_colour = circle_colour
         self.glow = glow
-
-
+        self.angle_path=stop_angle-start_angle
     def draw(self, percent):
-        # start_angle=45,
-        # stop_angle=135,
-        angle_path = self.stop_angle-self.start_angle
-        fill_angle = int(percent*angle_path/100)
+        fill_angle = int(percent*self.angle_path/100)
         per=percent
         if percent > 100:
             percent = 100
@@ -32,25 +28,24 @@ class Gauge:
             per=0
         if per > 100:
             per = 100
-        ac = [int(per*255/100),int(per*255/100),int(0), 255]
+        ac = [int(255-per*255/100),int(per*255/100),int(0), 255]
         for indexi in range(len(ac)):
             if ac[indexi] < 0:
                 ac[indexi] = 0
             if ac[indexi] > 255:
                 ac[indexi] = 255
-        # print(ac)
 
-        pertext = self.Font.render(str(percent) + " Kmh", True, ac)
+        pertext = self.Font.render(str(percent) + " Kmh", True, [255,255,255])
         pertext_rect = pertext.get_rect(center=(int(self.x_cord), int(self.y_cord)))
         self.screen.blit(pertext, pertext_rect)
 
         for i in range(0, self.thickness):
+            pygame.gfxdraw.arc(screen, int(self.x_cord), int(self.y_cord), self.radius - i, self.start_angle,self.stop_angle, self.circle_colour)
+            if percent >4:
+               pygame.gfxdraw.arc(screen, int(self.x_cord), int(self.y_cord), self.radius - i, self.start_angle, fill_angle + self.start_angle, ac)
 
-            pygame.gfxdraw.arc(screen, int(self.x_cord), int(self.y_cord), self.radius - i, self.start_angle, fill_angle+ self.start_angle, self.circle_colour)
-            pygame.gfxdraw.arc(screen, int(self.x_cord), int(self.y_cord), self.radius - i, self.start_angle, fill_angle + self.start_angle, ac)
-
-        # if percent < 4:
-        #     return
+        if percent < 4:
+             return
 
         if self.glow:
             for i in range(0,15):
@@ -73,16 +68,16 @@ class Gauge:
             for i in range(0,10):
                 ac [3] = int(150 - i*15)
                 pygame.gfxdraw.arc(screen, int(lx), int(ly), (self.thickness//2)+i , self.start_angle, fill_angle - self.start_angle, ac)
-                # pygame.gfxdraw.arc(screen, int(lx), int(ly), (self.thickness//2)+i , fill_angle  self.start_angle, fill_angle - self.start_angle, ac)
-                # pygame.gfxdraw.arc(screen, int(lx), int(ly), (self.thickness//2)+i , fill_angle -225-10, fill_angle - 225-180-10, ac)
+                #pygame.gfxdraw.arc(screen, int(lx), int(ly), (self.thickness//2)+i , fill_angle  self.start_angle, fill_angle - self.start_angle, ac)
+                #pygame.gfxdraw.arc(screen, int(lx), int(ly), (self.thickness//2)+i , fill_angle -225-10, fill_angle - 225-180-10, ac)
 
 if __name__ == '__main__':
-    bg_c = (56, 56, 56)
+    bg_c = (0, 0, 0)
     circle_c = (55, 77, 91)
     val=''
     values=''
     pygame.init()
-    width, height = (1366/2, 800/2)
+    width, height = (800/2, 480/2)
     clock = pygame.time.Clock()
     screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
 
@@ -148,4 +143,4 @@ if __name__ == '__main__':
         pygame.draw.circle(screen, (255,255,255), (int(width), int(height)), 210, 12)
         pygame.draw.circle(screen, (55, 77, 91), (int(width), int(height)), 220, 12)
         pygame.display.update()
-        clock.tick(fps)
+clock.tick(fps)
