@@ -111,8 +111,8 @@ if __name__ == '__main__':
         y_cord=height,
         thickness=15,
         radius=180,
-        start_angle=0,
-        stop_angle=80,
+        start_angle=100,
+        stop_angle=170,
         circle_colour=circle_c,
         txt_unit='',
         txt_disp=False,
@@ -120,8 +120,8 @@ if __name__ == '__main__':
     acel= Gauge(
         screen=screen,
         FONT=pygame.font.Font("./NFS_by_JLTV.ttf", 20),
-        x_cord=width + 200 ,
-        y_cord=height + 150,
+        x_cord=width + 200,
+        y_cord=height + 200,
         thickness=5,
         radius=50,
         start_angle=45,
@@ -148,7 +148,7 @@ if __name__ == '__main__':
         speed.draw(percent=int(number))
         acel.draw(percent=int(number))
         battery.draw(percent=int(number))
-        pygame.draw.circle(screen, (255,255,255), (int(width), int(height)), 210, 12)
-        pygame.draw.circle(screen, (55, 77, 91), (int(width), int(height)), 220, 12)
+        #pygame.draw.circle(screen, (255,255,255), (int(width), int(height)), 210, 12)
+        #pygame.draw.circle(screen, (55, 77, 91), (int(width), int(height)), 220, 12)
         pygame.display.update()
 clock.tick(fps)
