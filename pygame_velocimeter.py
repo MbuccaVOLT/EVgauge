@@ -113,9 +113,9 @@ if __name__ == '__main__':
         glow=False)
     battery= Gauge(
         screen=screen,
-        FONT=FONT_,
-        x_cord=width + 50 ,
-        y_cord=height + 50,
+        FONT=pygame.font.Font("./NFS_by_JLTV.ttf", 5),
+        x_cord=width + 180 ,
+        y_cord=height + 180,
         thickness=5,
         radius=50,
         start_angle=120,
