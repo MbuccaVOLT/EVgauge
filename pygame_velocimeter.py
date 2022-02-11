@@ -72,7 +72,7 @@ class Gauge:
                 #pygame.gfxdraw.arc(screen, int(lx), int(ly), (self.thickness//2)+i , fill_angle -225-10, fill_angle - 225-180-10, ac)
 
 if __name__ == '__main__':
-    bg_c = (56, 56, 56)
+    bg_c = (0, 0, 0)
     circle_c = (55, 77, 91)
     val=''
     values=''
@@ -140,5 +140,7 @@ if __name__ == '__main__':
         speed.draw(percent=int(number))
         acel.draw(percent=int(number))
         battery.draw(percent=int(number))
+        pygame.draw.circle(screen, (255,255,255), (int(width), int(height)), 210, 12)
+        pygame.draw.circle(screen, (55, 77, 91), (int(width), int(height)), 220, 12)
         pygame.display.update()
-        clock.tick(fps)
+clock.tick(fps)
