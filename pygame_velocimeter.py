@@ -64,7 +64,7 @@ class Gauge:
             lx = int(lx+self.x_cord)
             ly = int(ly + self.y_cord)
 
-            pygame.draw.circle(self.screen,ac,(lx,ly),int(self.thickness/2),0)
+            pygame.draw.circle(self.screen,ac,(lx,resetly),int(self.thickness/2),0)
 
 
             for i in range(0,10):
@@ -95,12 +95,12 @@ if __name__ == '__main__':
         screen=screen,
         FONT=FONT_,
         x_cord=width ,
-        y_cord=height,
+        y_cord=height,                
         thickness=30,
         radius=200,
         start_angle=200,
         stop_angle=340,
-        circle_colour=circle_c,
+        circle_colour=circle_c,                
         txt_unit=' Km/h',
         txt_disp=True,
         glow=False)
@@ -109,7 +109,7 @@ if __name__ == '__main__':
         FONT=FONT_,
         x_cord=width,
         y_cord=height,
-        thickness=15,
+        thickness=19,
         radius=180,
         start_angle=100,
         stop_angle=170,
@@ -117,11 +117,12 @@ if __name__ == '__main__':
         txt_unit='',
         txt_disp=False,
         glow=False)
+    
     acel= Gauge(
         screen=screen,
         FONT=pygame.font.Font("./NFS_by_JLTV.ttf", 20),
-        x_cord=width + 200,
-        y_cord=height + 200,
+        x_cord=width + 130,
+        y_cord=height + 130,
         thickness=5,
         radius=50,
         start_angle=45,
@@ -145,9 +146,13 @@ if __name__ == '__main__':
         except:
                 pass
         screen.fill(bg_c)
+        # pygame.gfxdraw.arc(screen, int(lx), int(ly), (self.thickness//2)+i , self.start_angle, fill_angle - self.start_angle, ac)
+        for i in range(0, 10):
+             pygame.gfxdraw.arc(screen, int(width), int(height), 210-i, 58, 32, (255,255,255))
         speed.draw(percent=int(number))
         acel.draw(percent=int(number))
         battery.draw(percent=int(number))
+        # pygame.draw.arc(screen, (255,255,255),[int(width), int(height),int(width+200), int(height+200)],45, 360, 22)
         #pygame.draw.circle(screen, (255,255,255), (int(width), int(height)), 210, 12)
         #pygame.draw.circle(screen, (55, 77, 91), (int(width), int(height)), 220, 12)
         pygame.display.update()
